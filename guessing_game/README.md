@@ -1,4 +1,4 @@
-#Guessing Game
+# Guessing Game
 
 This is a beginner programming programing problem: a guessing game. The program
 will generate a random integer between 1 and 100. It will them prompt the
