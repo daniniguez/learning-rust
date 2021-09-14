@@ -1,6 +1,13 @@
+//Let Rust know we are using 'rand' crate
+//enables to call anything placing ::rand
+extern crate rand;
+
 //Module that contains Read and Write traits
 //including the ability to accept user input.
 use std::io; 
+
+//Enables methods for gneraing random numbers. 
+use rand::Rng;
 
 fn main() {
 
@@ -8,6 +15,18 @@ fn main() {
     //and requesting input from the user.
     println!("Guess the number!");
     
+    //rand::thred_rng is the random number generator
+    //seeded by the operating system.
+    //gen_range is a method called to the funcion
+    //previously defined by use rand::Rng statement.
+    //This method takes two numbers as arguments
+    //and generates the random number.
+    //It is inclusive in the lower bound
+    //and esclusive in the uppper bound.
+    let secret_number = rand::thread_rng().gen_range(1, 101);
+
+    println!("The secret number is: {}", secret_number);
+
     println!("Please input your guess.");
 
     //let creates a variable named guess to store
