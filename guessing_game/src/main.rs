@@ -87,7 +87,7 @@ fn main() {
     //match expression is made up of 'arms'. An arm consist
     //of a pattern and the code that should be run if the
     //value given to the beginning of the match expression
-    //fits the ar pattern.
+    //fits the arm's pattern.
     match guess.cmp(&secret_number) {
         Ordering::Less => println!("Too small!"),
         Ordering::Greater => println!("Too big!"),
