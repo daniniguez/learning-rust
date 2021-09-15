@@ -6,7 +6,11 @@ extern crate rand;
 //including the ability to accept user input.
 use std::io; 
 
-//Enables methods for gneraing random numbers. 
+//This type is an enum with Less, Greater,
+//and Equal variants.
+use std::cmp::Ordering;
+
+//Enables methods for generating random numbers. 
 use rand::Rng;
 
 fn main() {
@@ -15,14 +19,14 @@ fn main() {
     //and requesting input from the user.
     println!("Guess the number!");
     
-    //rand::thred_rng is the random number generator
+    //rand::thread_rng is the random number generator
     //seeded by the operating system.
     //gen_range is a method called to the funcion
     //previously defined by use rand::Rng statement.
     //This method takes two numbers as arguments
     //and generates the random number.
     //It is inclusive in the lower bound
-    //and esclusive in the uppper bound.
+    //and exclusive in the uppper bound.
     let secret_number = rand::thread_rng().gen_range(1, 101);
 
     println!("The secret number is: {}", secret_number);
@@ -32,7 +36,6 @@ fn main() {
     //let creates a variable named guess to store
     //the user input.
     //mut makes a mutable variable.
-
     //String::new is a function that returns a
     //new instance of a 'String'
     //'String' is a type provided by the standard library.
@@ -42,17 +45,14 @@ fn main() {
     let mut guess = String::new();
 
     //stdin is a type that represents a handle
-    //to the standard input of the terminal.
-    
+    //to the standard input of the terminal.    
     //read_line is a method that gets the input
     //from the user from the standard input handle.
-
     //We are passing the &mut guess argument.
     //read_line takes what the user types into the
     //standard input and place that into a string
     //using that string as an argument and it needs
-    //to be 'mut'able.
-
+    //to be mutable.
     //& indicates that this argument is a reference
     //making data available without needing to
     //copy that data into the memory multiple times.
@@ -61,18 +61,36 @@ fn main() {
         //read_line returns a value io::Result
         //'Result' type is an enumeration which is
         //type that can have a fixed set of values.
-
         //For 'Result' the variants are 'Ok' and 'Err'.
         //This to encode error handling information.
         //As any other type it has methods defined on it.
         //expect is a method for io::Result.
-
         //If the instance for io:Result is 'Err' expect
         //will cause the program to crash and display
         //the message passed as an argument.
         .expect("Failed to read line");
 
-    //Prints the sting we saved the user's input in.
-    //{} is a placeholder that will print guess' value.
+    //Here let guess declares a new variable that replaces
+    //guess string variable declared before
+    //by means of calling the trim method which
+    //removes any blank spaces at the end or beginning
+    //of the string and the parse method parsing the string
+    //into some kind of number in this case a u32 integer.
+    let guess: u32 = guess.trim().parse()
+        .expect("Please type a number!");
+
+    //Prints the string we saved the user's input in.
+    //{} is a placeholder that will print guess value.
     println!("You guessed: {}", guess);
+
+    //cmp method compares 2 values guess and the secret number.
+    //match expression is made up of 'arms'. An arm consist
+    //of a pattern and the code that should be run if the
+    //value given to the beginning of the match expression
+    //fits the ar pattern.
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win!"),
+    }
 }
