@@ -29,7 +29,7 @@ fn main() {
     //and exclusive in the uppper bound.
     let secret_number = rand::thread_rng().gen_range(1, 101);
 
-    println!("The secret number is: {}", secret_number);
+    //println!("The secret number is: {}", secret_number);
 
     //Inserting a loop to give the user more chances
     //to guess.
@@ -79,9 +79,17 @@ fn main() {
         //removes any blank spaces at the end or beginning
         //of the string and the parse method parsing the string
         //into some kind of number in this case a u32 integer.
-        let guess: u32 = guess.trim().parse()
-            .expect("Please type a number!");
+        let guess: u32 = match guess.trim().parse(){
+            //.expect("Please type a number!");
 
+            //Adding match to handle error instead
+            //of just crashing the program.
+            //_ is a catchall value matching all
+            //Err values to execute continue i.e.
+            //go to the next loop.
+            Ok(num) => num,
+            Err(_) => continue,
+        };
         //Prints the string we saved the user's input in.
         //{} is a placeholder that will print guess value.
         println!("You guessed: {}", guess);
