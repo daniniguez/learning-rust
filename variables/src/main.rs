@@ -1,4 +1,4 @@
-// Variables by default are immutable meaning that once a vallue is bound
+// Variables by default are immutable meaning that once a value is bound
 // to a name you cannot change that value.
 // The compiler then guarantees that when you state a value won't change
 // it really won't.
